@@ -15,7 +15,7 @@ struct PokemonListView: View {
                         NavigationLink(destination: DetailView(pokemon: pokemon)) {
                             PokemonRowView(pokemon: pokemon)
                         }
-                    }
+                    }.listStyle(.inset)
                 }
             }
             .navigationTitle("Pokemons")
@@ -28,7 +28,7 @@ struct PokemonListView: View {
 
     private func fetchData() {
         isLoading = true
-        NetworkingManager.shared.fetchData(from: "https://pokeapi.co/api/v2/pokemon?limit=40&offset=0") { (result: Result<PokemonsResponse, NetworkError>) in
+        NetworkingManager.shared.fetchData(from: "https://pokeapi.co/api/v2/pokemon?limit=10&offset=0") { (result: Result<PokemonsResponse, NetworkError>) in
             DispatchQueue.main.async {
                 isLoading = false
                 

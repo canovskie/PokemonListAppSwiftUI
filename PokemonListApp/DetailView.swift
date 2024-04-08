@@ -10,6 +10,7 @@ struct DetailView: View {
             
             Text(pokemon.name)
                 .font(.largeTitle)
+                .fontWeight(.black)
                 .textCase(.uppercase)
             
             Spacer()
@@ -34,8 +35,9 @@ struct DetailView: View {
                     List {
                         ForEach(abilities, id: \.self) { ability in
                             Text(ability)
+                                .textCase(.uppercase)
                         }
-                    }
+                    }.listStyle(.plain)
                 }
             }
             
@@ -64,5 +66,12 @@ struct DetailView: View {
                 print("Failed to fetch abilities: \(error)")
             }
         }
+    }
+}
+
+struct DetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        let examplePokemon = Pokemon(name: "Pikachu", url: "https://pokeapi.co/api/v2/pokemon/25/")
+        return DetailView(pokemon: examplePokemon)
     }
 }
