@@ -68,9 +68,9 @@
 				36BFD23F2BC3083300712822 /* PokemonListAppApp.swift */,
 				36BFD2412BC3083300712822 /* PokemonListView.swift */,
 				36A3F1CC2BC3738E00532714 /* DetailView.swift */,
-				36BFD24D2BC31A1900712822 /* NetworkingManager.swift */,
 				36BFD24F2BC31B0300712822 /* PokemonResponse.swift */,
 				36A3F1D12BC3883600532714 /* PokemonRowView.swift */,
+				36BFD24D2BC31A1900712822 /* NetworkingManager.swift */,
 				36BFD2432BC3083500712822 /* Assets.xcassets */,
 				36BFD2452BC3083500712822 /* Preview Content */,
 			);
