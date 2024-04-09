@@ -10,6 +10,17 @@ struct Pokemon: Codable, Identifiable {
     let url: String
 }
 
+extension Pokemon {
+    var imageUrl: URL? {
+        guard let idString = url.split(separator: "/").last,
+              let id = Int(idString) else {
+            return nil
+        }
+        return URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/\(id).png")
+    }
+}
+
+
 struct PokemonDetailsResponse: Codable {
     let abilities: [Ability]
 }
