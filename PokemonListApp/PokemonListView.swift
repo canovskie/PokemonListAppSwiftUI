@@ -1,5 +1,4 @@
 import SwiftUI
-import SDWebImage
 
 struct PokemonListView: View {
     @State private var pokemons: [Pokemon] = []
@@ -7,15 +6,25 @@ struct PokemonListView: View {
     
     var body: some View {
         NavigationView {
-            HStack {
+            VStack {
                 if isLoading {
                     ProgressView("Loading...")
                 } else {
-                    List(pokemons, id: \.name) { pokemon in
-                        NavigationLink(destination: DetailView(pokemon: pokemon)) {
-                            PokemonRowView(pokemon: pokemon)
+                    List {
+                        ForEach(pokemons, id: \.name) { pokemon in
+                            NavigationLink(destination: DetailView(pokemon: pokemon)) {
+                                PokemonRowView(pokemon: pokemon)
+                            }
                         }
-                    }.listStyle(.inset)
+                        .onDelete(perform: deleteItems)
+                        .onMove(perform: move)
+                    }
+                    .listStyle(PlainListStyle())
+                    .toolbar {
+                                            ToolbarItem(placement: .navigationBarLeading) {
+                                                EditButton()
+                                            }
+                                        }
                 }
             }
             .navigationTitle("Pokemons")
@@ -25,7 +34,15 @@ struct PokemonListView: View {
             fetchData()
         }
     }
-
+    
+    private func deleteItems(at offsets: IndexSet) {
+        pokemons.remove(atOffsets: offsets)
+    }
+    
+    func move(from source: IndexSet, to destination: Int){
+        pokemons.move(fromOffsets: source, toOffset: destination)
+    }
+    
     private func fetchData() {
         isLoading = true
         NetworkingManager.shared.fetchData(from: "https://pokeapi.co/api/v2/pokemon?limit=40&offset=0") { (result: Result<PokemonsResponse, NetworkError>) in

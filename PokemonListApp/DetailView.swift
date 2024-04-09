@@ -12,9 +12,7 @@ struct DetailView: View {
                 .font(.largeTitle)
                 .fontWeight(.black)
                 .textCase(.uppercase)
-            
-            Spacer()
-            
+                        
             if let idString = pokemon.url.split(separator: "/").last, let pokemonId = Int(idString) {
                 let imageUrlString = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/\(pokemonId).png"
                 
@@ -37,11 +35,10 @@ struct DetailView: View {
                             Text(ability)
                                 .textCase(.uppercase)
                         }
-                    }.listStyle(.plain)
+                    }.listStyle(.inset)
                 }
             }
-            
-            Spacer()
+           
         }
         .padding()
         .onAppear {
@@ -71,7 +68,7 @@ struct DetailView: View {
 
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
-        let examplePokemon = Pokemon(name: "Pikachu", url: "https://pokeapi.co/api/v2/pokemon/25/")
+        let examplePokemon = Pokemon(name: "Fatoş Çelik", url: "https://pokeapi.co/api/v2/pokemon/25/")
         return DetailView(pokemon: examplePokemon)
     }
 }
